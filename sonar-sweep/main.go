@@ -39,19 +39,21 @@ func (s SonarSweep) AnalyzeDepths() (int, int, int) {
 	increaseCount, decreaseCount, totalDepth := 0, 0, 0
 	var averageDepth int
 
-	for i := 1; i < len(s.Depths); i++ {
-		depth := s.Depths[i]
-		switch {
-		case depth > s.Depths[i-1]:
-			fmt.Printf("Depth increased from %d to %d\n", s.Depths[i-1], depth)
-			increaseCount++
-		case depth < s.Depths[i-1]:
-			fmt.Printf("Depth decreased from %d to %d\n", s.Depths[i-1], depth)
-			decreaseCount++
-		default:
-			fmt.Printf("Depth stayed the same at %d\n", depth)
+	for i := 0; i < len(s.Depths); i++ {
+		if i > 0 {
+			depth := s.Depths[i]
+			switch {
+			case depth > s.Depths[i-1]:
+				fmt.Printf("Depth increased from %d to %d\n", s.Depths[i-1], depth)
+				increaseCount++
+			case depth < s.Depths[i-1]:
+				fmt.Printf("Depth decreased from %d to %d\n", s.Depths[i-1], depth)
+				decreaseCount++
+			default:
+				fmt.Printf("Depth stayed the same at %d\n", depth)
+			}
 		}
-		totalDepth += depth
+		totalDepth += s.Depths[i]
 	}
 
 	if len(s.Depths) > 0 {
