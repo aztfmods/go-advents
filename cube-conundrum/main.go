@@ -57,7 +57,6 @@ func ProcessGame(gameData string, maxCubes CubeCount) bool {
 
 		currentSet := CubeCount{Red: redCount, Green: greenCount, Blue: blueCount}
 
-		// Check if the current set can be drawn from maxCubes.
 		if !maxCubes.CanDraw(currentSet) {
 			return false
 		}
