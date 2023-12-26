@@ -1,13 +1,13 @@
 ```mermaid
 graph TD
-    A[Start] --> B[For each Game in Records]
-    B --> C[Analyze Game: Check Cube Counts]
-    C --> D{Game Possible with Limits?}
-    D -->|Yes| E[Add Game ID to Sum]
-    D -->|No| F[Continue to Next Game]
-    E --> G[End of Game Records?]
-    F --> G
-    G -->|No| B
-    G -->|Yes| H[Output Sum of Valid Game IDs]
-    H --> I[End]
+    A(Start) --> B[Input Command (cmd)]
+    B --> C[Split Command\nparts := strings.Fields(cmd)]
+    C --> D[Parse Number\nvar value int; fmt.Sscanf(parts[1], "%d", &value)]
+    D --> E{Command Type?\nswitch parts[0]}
+    E -->|Forward| F[Increase Horizontal Position]
+    E -->|Down| G[Increase Depth]
+    E -->|Up| H[Decrease Depth]
+    F --> I(End)
+    G --> I
+    H --> I
 ```
