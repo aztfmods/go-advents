@@ -1,13 +1,16 @@
 ```mermaid
 graph TD
-    A(Start) --> B[Input Command (cmd)]
-    B --> C[Split Command<br>parts := strings.Fields(cmd)]
-    C --> D[Parse Number<br>var value int; fmt.Sscanf(parts[1], "%d", &value)]
-    D --> E{Command Type?<br>switch parts[0]}
-    E -->|Forward| F[Forward<br>Increase Horizontal Position]
-    E -->|Down| G[Down<br>Increase Depth]
-    E -->|Up| H[Up<br>Decrease Depth]
-    F --> I(End)
-    G --> I
-    H --> I
+    A[Start] --> B{Read Next Command}
+    B -->|forward X| C[Increase Horizontal Position by X]
+    B -->|down X| D[Increase Depth by X]
+    B -->|up X| E[Decrease Depth by X]
+    B -->|No More Commands| F[Calculate Final Position]
+    C --> G[Update Horizontal Position]
+    D --> H[Update Depth]
+    E --> I[Update Depth]
+    G --> B
+    H --> B
+    I --> B
+    F --> J[End: Multiply Horizontal Position by Depth]
+    J --> K[End]
 ```
